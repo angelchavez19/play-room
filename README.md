@@ -1,86 +1,88 @@
+Aquí tienes la traducción al inglés:
+
 # PlayRoom
 
-**PlayRoom** es una colección de mini-juegos interactivos desarrollada con Vue.js y NestJS, diseñada para divertirse con amigos.
+**PlayRoom** is a collection of interactive mini-games developed with Vue.js and NestJS, designed for having fun with friends.
 
-## Tabla de Contenidos
+## Table of Contents
 
-- [Características](#características)
-  - [🎮 Juegos incluidos](#-juegos-incluidos)
-- [Tecnologías](#tecnologías)
-- [Instalación](#instalación)
-- [Uso](#uso)
+- [Features](#features)
+  - [🎮 Included Games](#-included-games)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
 
-## Características
+## Features
 
-- 🛠️ Frontend desarrollado con Vue.js.
-- 🌐 Backend utilizando NestJS.
-- ⚡ Conexión en tiempo real (si es aplicable, utilizando websockets o similar).
-- 🔧 Arquitectura modular para añadir más juegos en el futuro.
+- 🛠️ Frontend developed with Vue.js.
+- 🌐 Backend using NestJS.
+- ⚡ Real-time connection (if applicable, using websockets or similar).
+- 🔧 Modular architecture for adding more games in the future.
 
-### 🎮 Juegos incluidos
+### 🎮 Included Games
 
-- Piedra, Papel, Tijera
+- Rock, Paper, Scissors
 - Tic-Tac-Toe.
 
-## Tecnologías
+## Technologies
 
-El proyecto utiliza las siguientes tecnologías:
+The project uses the following technologies:
 
 - **Frontend**
-  - [Vue.js](https://vuejs.org/) - Framework progresivo para la construcción de interfaces de usuario.
-- **Backend**:
-  - [NestJS](https://nestjs.com/) - Framework de backend basado en Node.js.
+  - [Vue.js](https://vuejs.org/) - Progressive framework for building user interfaces.
+- **Backend**
+  - [NestJS](https://nestjs.com/) - Backend framework based on Node.js.
 
-## Instalación
+## Installation
 
-Sigue estos pasos para clonar e instalar el proyecto:
+Follow these steps to clone and install the project:
 
-1. Clona el repositorio:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/angelchavez19/play-room.git
    ```
 
-2. Accede al directorio del proyecto:
+2. Access the project directory:
 
    ```bash
    cd playroom
    ```
 
-3. Instala las dependencias del frontend:
+3. Install the frontend dependencies:
 
    ```bash
    cd frontend
    npm install
    ```
 
-4. Instala las dependencias del backend:
+4. Install the backend dependencies:
 
    ```bash
    cd ../backend
    npm install
    ```
 
-## Uso
+## Usage
 
-### Ejecutar el Frontend (Vue.js)
+### Running the Frontend (Vue.js)
 
-Para iniciar el servidor de desarrollo del frontend:
+To start the development server for the frontend:
 
 ```bash
 cd frontend
 npm run dev
 ```
 
-El servidor de desarrollo estará corriendo en `http://localhost:5173`.
+The development server will be running at `http://localhost:5173`.
 
-### Ejecutar el Backend (NestJS)
+### Running the Backend (NestJS)
 
-Para iniciar el servidor del backend:
+To start the backend server:
 
 ```bash
 cd backend
 npm run start
 ```
 
-El servidor de NestJS estará corriendo en `http://localhost:8000`.
+The NestJS server will be running at `http://localhost:8000`.
