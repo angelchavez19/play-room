@@ -43,24 +43,44 @@ Follow these steps to clone and install the project:
    git clone https://github.com/angelchavez19/play-room.git
    ```
 
-2. Access the project directory:
+1. Access the project directory:
 
    ```bash
    cd playroom
    ```
 
-3. Install the frontend dependencies:
+1. Install the frontend dependencies:
 
    ```bash
    cd frontend
    npm install
    ```
 
-4. Install the backend dependencies:
+1. Install the backend dependencies:
 
    ```bash
    cd ../backend
    npm install
+   ```
+
+1. Environment variables configuration
+
+   ```plaintext
+   #Database
+
+   DATABASE_URL="postgresql://postgres:@localhost:5432/playroom"
+
+   # Server
+
+   SERVER_BACKEND=http://localhost:8000
+   SERVER_FRONTEND=http://localhost:5173
+
+   # Email
+
+   EMAIL_HOST=smtp.gmail.com
+   EMAIL_PORT=587
+   EMAIL_HOST_USER=<your-email-host-user>
+   EMAIL_HOST_PASSWORD=<your-email-host-password>
    ```
 
 ## Usage
