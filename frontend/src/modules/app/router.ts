@@ -1,4 +1,4 @@
-import IndexPage from './index.vue'
+import IndexPage from './p-index.vue'
 
 export const AppRouter = [
   {

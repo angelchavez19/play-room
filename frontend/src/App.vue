@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import LyBase from './layouts/ly-base.vue'
 </script>
 
 <template>
-  <RouterView />
+  <LyBase>
+    <RouterView />
+  </LyBase>
 </template>
