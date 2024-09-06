@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import ILogo from './icon/i-logo.vue'
+import { useAuthStore } from '@/modules/auth/stores/auth'
+
+const { authenticated, token } = useAuthStore()
 </script>
 
 <template>
@@ -7,7 +10,11 @@ import ILogo from './icon/i-logo.vue'
     <RouterLink to="/" class="Header-logo">
       <ILogo />
     </RouterLink>
-    <RouterLink to="/" class="Header-action"> Registrarse </RouterLink>
+    <RouterLink v-if="token === null" to="/auth/register" class="Header-action">Sign up</RouterLink>
+    <RouterLink v-else-if="!authenticated" to="/auth/login" class="Header-action">
+      Sign in
+    </RouterLink>
+    <RouterLink v-else to="/auth/logout" class="Header-action">Sign out</RouterLink>
   </header>
 </template>
 
