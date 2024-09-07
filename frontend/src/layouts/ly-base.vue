@@ -13,4 +13,5 @@ import CHeader from '@/components/c-header.vue'
 .Main
   width: 100%
   padding: .2rem .7rem
+  margin-top: 1rem
 </style>

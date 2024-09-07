@@ -14,7 +14,7 @@ const { authenticated, token } = useAuthStore()
     <RouterLink v-else-if="!authenticated" to="/auth/login" class="Header-action">
       Sign in
     </RouterLink>
-    <RouterLink v-else to="/auth/logout" class="Header-action">Sign out</RouterLink>
+    <button v-else class="Header-action">Sign out</button>
   </header>
 </template>
 
@@ -38,4 +38,7 @@ const { authenticated, token } = useAuthStore()
     text-decoration: none
     padding: .5rem .7rem
     border-radius: 2rem
+  button.Header-action
+    border: none
+    cursor: pointer
 </style>
