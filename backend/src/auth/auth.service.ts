@@ -70,6 +70,7 @@ export class AuthService {
 
   parseUserInfo(info: User) {
     return {
+      name: info.name,
       picture: info.picture,
     };
   }

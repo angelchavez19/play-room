@@ -12,29 +12,33 @@ onMounted(async () => {
 
 <template>
   <header class="Header">
-    <RouterLink to="/" class="Header-logo">
+    <RouterLink to="/" class="Header-logo" aria-label="Go to main page">
       <ILogo />
     </RouterLink>
     <RouterLink v-if="!auth.authenticated" to="/auth/login" class="Header-action">
       Sign in
     </RouterLink>
-    <button v-else class="Header-action">Sign out</button>
+    <RouterLink v-else to="/user/account" class="Header-avatar" aria-label="Go to user account">
+      <img :src="auth.user?.picture" :alt="auth.user?.name" />
+    </RouterLink>
   </header>
 </template>
 
 <style scoped lang="sass">
+@mixin w-h()
+  width: 45px
+  height: 45px
+
 .Header
   @include f-c-b()
   background-color: $background-2
   width: 100%
   border-radius: 2rem
-  padding: .2rem .7rem
-  .Header-logo
-    width: 45px
-    height: 45px
-    svg
-      width: 45px
-      height: 45px
+  padding: .5rem .7rem
+  gap: 1rem
+  .Header-logo,
+  .Header-logo svg
+    @include w-h()
   .Header-action
     @include f-button(1rem)
     background-color: $primary
@@ -45,4 +49,11 @@ onMounted(async () => {
   button.Header-action
     border: none
     cursor: pointer
+  .Header-avatar
+    @include f-c-c()
+    gap: 1rem
+    img
+      @include w-h()
+      border-radius: 50%
+      border: 2px solid $secondary
 </style>
