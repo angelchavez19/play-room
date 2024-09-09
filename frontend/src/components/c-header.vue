@@ -2,7 +2,7 @@
 import ILogo from './icon/i-logo.vue'
 import { useAuthStore } from '@/modules/auth/stores/auth'
 
-const { authenticated, token } = useAuthStore()
+const { authenticated } = useAuthStore()
 </script>
 
 <template>
@@ -10,10 +10,8 @@ const { authenticated, token } = useAuthStore()
     <RouterLink to="/" class="Header-logo">
       <ILogo />
     </RouterLink>
-    <RouterLink v-if="token === null" to="/auth/register" class="Header-action">Sign up</RouterLink>
-    <RouterLink v-else-if="!authenticated" to="/auth/login" class="Header-action">
-      Sign in
-    </RouterLink>
+    <!-- <RouterLink v-if="token === null" to="/auth/register" class="Header-action">Sign up</RouterLink> -->
+    <RouterLink v-if="!authenticated" to="/auth/login" class="Header-action">Sign in</RouterLink>
     <button v-else class="Header-action">Sign out</button>
   </header>
 </template>
@@ -21,7 +19,7 @@ const { authenticated, token } = useAuthStore()
 <style scoped lang="sass">
 .Header
   @include f-c-b()
-  background-color: $secondary
+  background-color: $background-2
   width: 100%
   border-radius: 2rem
   padding: .2rem .7rem
@@ -33,7 +31,7 @@ const { authenticated, token } = useAuthStore()
       height: 45px
   .Header-action
     @include f-button(1rem)
-    background-color: $highlight
+    background-color: $primary
     color: $text
     text-decoration: none
     padding: .5rem .7rem

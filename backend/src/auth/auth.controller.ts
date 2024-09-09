@@ -1,28 +1,13 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  HttpCode,
-  HttpException,
-  HttpStatus,
-  Post,
-} from '@nestjs/common';
-import { CreateUserDTO } from './dto/create-user.dto';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { GoogleCredentialsDTO } from './dto/google-credentials.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/create')
-  @HttpCode(200)
-  async createUser(@Body() user: CreateUserDTO) {
-    if (!(await this.authService.createUser(user)))
-      throw new HttpException('User already exists', HttpStatus.CONFLICT);
-  }
-
-  @Delete('/del')
-  async deleteUser() {
-    this.authService.deleteUser();
+  @Post('/login/google')
+  async loginWithGoogle(@Body() credentials: GoogleCredentialsDTO) {
+    return this.authService.loginWithGoogle(credentials);
   }
 }
