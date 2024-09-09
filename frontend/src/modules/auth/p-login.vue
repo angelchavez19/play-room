@@ -2,14 +2,16 @@
 import IGoogle from '@/components/icon/i-google.vue'
 import { useLogin } from './composables/login'
 
-const { login } = useLogin()
+const { disabledLoginButton, login } = useLogin()
 </script>
 
 <template>
   <section class="AuthForm-container">
     <div class="AuthForm">
       <h1 class="AuthForm-title">Play Room</h1>
-      <button class="AuthForm-loginbutton" @click="login"><IGoogle /> Sign in with Google</button>
+      <button class="AuthForm-loginbutton" @click="login" :disabled="disabledLoginButton">
+        <IGoogle /> Sign in with Google
+      </button>
     </div>
   </section>
 </template>
@@ -45,4 +47,6 @@ const { login } = useLogin()
         width: 30px
         height: 30px
         fill: $text
+    .AuthForm-loginbutton[disabled]
+      cursor: not-allowed
 </style>

@@ -1,5 +1,6 @@
 import { useStorage } from '@/composables/storage'
 import { backendURL } from '@/config'
+import { fetchJSON } from '@/utils/api'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
@@ -8,14 +9,24 @@ export const useAuthStore = defineStore('auth-store', () => {
   const authenticated = ref<boolean>(false)
 
   const verifyToken = async () => {
-    const response = await fetch(`${backendURL}/auth/valid-token`, {
+    const { response } = await fetchJSON(`${backendURL}/auth/valid-token`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: token.value })
+      body: { token: token.value },
+      json: false
     })
 
     authenticated.value = response.ok
   }
 
-  return { authenticated: authenticated.value, setValue, token: token.value, verifyToken }
+  const updateToken = (token: string) => {
+    setValue(token)
+    authenticated.value = true
+  }
+
+  return {
+    authenticated,
+    setValue: updateToken,
+    token: token.value,
+    verifyToken
+  }
 })

@@ -2,6 +2,7 @@ interface Options {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
   headers?: any
   body?: any
+  json?: boolean
 }
 
 export const fetchJSON = async <T>(url: string, options: Options | undefined) => {
@@ -14,5 +15,6 @@ export const fetchJSON = async <T>(url: string, options: Options | undefined) =>
     body: JSON.stringify(options?.body)
   })
 
-  return (await response.json()) as T
+  if (options?.json === false) return { response }
+  return { response, json: (await response.json()) as T }
 }

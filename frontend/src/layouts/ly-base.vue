@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import CHeader from '@/components/c-header.vue'
+import { Toaster } from 'vue-sonner'
 </script>
 
 <template>
   <CHeader />
   <main class="Main">
     <slot />
+    <Toaster />
   </main>
 </template>
 
