@@ -81,6 +81,15 @@ Follow these steps to clone and install the project:
    EMAIL_PORT=587
    EMAIL_HOST_USER=<your-email-host-user>
    EMAIL_HOST_PASSWORD=<your-email-host-password>
+
+   # Google Credentials
+
+   GOOGLE_CLIENT_ID=<client-id>
+   GOOGLE_CLIENT_SECRET=<client-secret>
+
+   # SECRETS
+
+   JWT_SECRET_KEY=<secret-key>
    ```
 
 ## Usage
