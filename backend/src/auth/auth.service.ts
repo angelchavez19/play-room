@@ -4,6 +4,8 @@ import { GoogleCredentialsDTO } from './dto/google-credentials.dto';
 import { Token, UserInfo } from './auth.interface';
 import { ApiService } from 'src/utils/api/api.service';
 import { JwtService } from '@nestjs/jwt';
+import { ValidateTokenDTO } from './dto/validate-token.dto';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -16,11 +18,21 @@ export class AuthService {
   async loginWithGoogle(credentials: GoogleCredentialsDTO) {
     const token = await this._getToken(credentials.code);
     const userInfo = await this._getUserInfo(token);
-    await this._createNonExistingUser(userInfo);
+    const user = await this._createNonExistingUser(userInfo);
 
     return {
       token: await this.jwt.signAsync({ sub: userInfo.sub }),
+      user: this.parseUserInfo(user),
     };
+  }
+
+  async validateToken(token: ValidateTokenDTO) {
+    const { exception, dataToken } = await this._getDataToken(token.token);
+
+    const existingUser = await this._getUserBySub(dataToken.sub);
+    if (!existingUser) throw exception;
+
+    return this.parseUserInfo(existingUser);
   }
 
   async _getToken(code: string) {
@@ -56,12 +68,21 @@ export class AuthService {
     }
   }
 
-  async _createNonExistingUser(userInfo: UserInfo) {
-    const existingUser = await this.prisma.user.findUnique({
-      where: { sub: userInfo.sub },
-    });
+  parseUserInfo(info: User) {
+    return {
+      picture: info.picture,
+    };
+  }
 
-    if (existingUser) return;
+  async _getUserBySub(sub: string): Promise<User> {
+    return await this.prisma.user.findUnique({
+      where: { sub: sub },
+    });
+  }
+
+  async _createNonExistingUser(userInfo: UserInfo): Promise<User> {
+    const existingUser = await this._getUserBySub(userInfo.sub);
+    if (existingUser) return existingUser;
 
     await this.prisma.user.create({
       data: {
@@ -73,5 +94,26 @@ export class AuthService {
         email: userInfo.email,
       },
     });
+
+    return existingUser;
+  }
+
+  async _getDataToken(token: string) {
+    const exception = new HttpException(
+      'Invalid token',
+      HttpStatus.UNAUTHORIZED,
+    );
+
+    let dataToken = null;
+
+    try {
+      dataToken = await this.jwt.verifyAsync(token);
+    } catch {
+      throw exception;
+    }
+
+    if (!dataToken.sub) throw exception;
+
+    return { exception, dataToken };
   }
 }

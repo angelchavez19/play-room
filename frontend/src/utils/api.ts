@@ -5,7 +5,17 @@ interface Options {
   json?: boolean
 }
 
-export const fetchJSON = async <T>(url: string, options: Options | undefined) => {
+export function fetchJSON<T>(
+  url: string,
+  options: { json: false } & Options
+): Promise<{ response: Response }>
+
+export function fetchJSON<T>(
+  url: string,
+  options?: Options
+): Promise<{ response: Response; json: T }>
+
+export async function fetchJSON<T>(url: string, options?: Options) {
   const response = await fetch(url, {
     method: options?.method,
     headers: {
@@ -15,6 +25,9 @@ export const fetchJSON = async <T>(url: string, options: Options | undefined) =>
     body: JSON.stringify(options?.body)
   })
 
-  if (options?.json === false) return { response }
+  if (options?.json === false) {
+    return { response }
+  }
+
   return { response, json: (await response.json()) as T }
 }

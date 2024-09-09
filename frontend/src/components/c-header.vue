@@ -1,8 +1,13 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import ILogo from './icon/i-logo.vue'
 import { useAuthStore } from '@/modules/auth/stores/auth'
 
 const auth = useAuthStore()
+
+onMounted(async () => {
+  await auth.initialize()
+})
 </script>
 
 <template>

@@ -4,13 +4,17 @@ import { fetchJSON } from '@/utils/api'
 import { useAuthStore } from '../stores/auth'
 import { toast } from 'vue-sonner'
 import { ref } from 'vue'
+import type { UserInfo } from '../user.interface'
+import { useRouter } from 'vue-router'
 
-interface Token {
+interface Response {
   token: string
+  user: UserInfo
 }
 
 export const useLogin = () => {
-  const { setValue } = useAuthStore()
+  const { setValue, updateUser } = useAuthStore()
+  const router = useRouter()
 
   const disabledLoginButton = ref<boolean>(false)
 
@@ -37,14 +41,16 @@ export const useLogin = () => {
 
   const sendCredentialsToBackend = (code: string) => {
     toast.promise(
-      fetchJSON<Token>(`${backendURL}/auth/login/google`, {
+      fetchJSON<Response>(`${backendURL}/auth/login/google`, {
         method: 'POST',
         body: { code }
       }),
       {
         loading: 'Loading...',
         success: ({ json }) => {
-          if (json?.token) setValue(json?.token)
+          setValue(json.token)
+          updateUser(json.user)
+          router.push({ name: 'index' })
           return 'Successful login'
         },
         error: () => 'Login failed'

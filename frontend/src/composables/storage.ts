@@ -14,5 +14,10 @@ export const useStorage = (options: Options) => {
     localStorage.setItem(options.key, value)
   }
 
-  return { data, setValue }
+  const clearValue = () => {
+    data.value = null
+    localStorage.removeItem(options.key)
+  }
+
+  return { clearValue, data, setValue }
 }
