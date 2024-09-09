@@ -85,7 +85,7 @@ export class AuthService {
     const existingUser = await this._getUserBySub(userInfo.sub);
     if (existingUser) return existingUser;
 
-    await this.prisma.user.create({
+    const newUser = await this.prisma.user.create({
       data: {
         sub: userInfo.sub,
         name: userInfo.name,
@@ -96,7 +96,7 @@ export class AuthService {
       },
     });
 
-    return existingUser;
+    return newUser;
   }
 
   async _getDataToken(token: string) {
