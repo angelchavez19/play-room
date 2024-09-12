@@ -12,13 +12,18 @@ onMounted(async () => {
 
 <template>
   <header class="Header">
-    <RouterLink to="/" class="Header-logo" aria-label="Go to main page">
+    <RouterLink :to="{ name: 'index' }" class="Header-logo" aria-label="Go to main page">
       <ILogo />
     </RouterLink>
-    <RouterLink v-if="!auth.authenticated" to="/auth/login" class="Header-action">
+    <RouterLink v-if="!auth.authenticated" :to="{ name: 'auth-login' }" class="Header-action">
       Sign in
     </RouterLink>
-    <RouterLink v-else to="/user/account" class="Header-avatar" aria-label="Go to user account">
+    <RouterLink
+      v-else
+      :to="{ name: 'user-account' }"
+      class="Header-avatar"
+      aria-label="Go to user account"
+    >
       <img :src="auth.user?.picture" :alt="auth.user?.name" />
     </RouterLink>
   </header>
