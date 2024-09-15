@@ -1,7 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CModes from '../components/c-modes.vue'
+import { TicTacToeInfo } from './info'
+</script>
 
 <template>
-  <h1>Tic Tac Toe game</h1>
+  <CModes v-bind="TicTacToeInfo" />
 </template>
 
 <style scoped lang="sass"></style>
